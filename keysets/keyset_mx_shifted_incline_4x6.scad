@@ -1,4 +1,4 @@
-include <components/keycap_mx_spherical.scad>;
+include <../components/keycap_mx_spherical.scad>;
 
 rows = 4;
 columns = 6;

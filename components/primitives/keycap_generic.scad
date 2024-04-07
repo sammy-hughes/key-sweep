@@ -41,22 +41,29 @@ module keycap_generic(width=[14, 2], r=[2, 4], slices=15, face_offset=[0, 0, 30]
     }
 
     module basic_shape(length=1) {
-        union()
-        for (i=[0:length-1])
-        hull() {
+        difference() {
+            union()
+            for (i=[0:length-1])
+            hull() {
+                mixed_rotate_translate(
+                    [for (a=face_offset) a*angle_index[i].y], 
+                    [for (a=face_angle) a*angle_index[i].y]
+                )
+                linear_extrude(height=0.01)
+                profile_slice(i);
+                
+                mixed_rotate_translate(
+                    [for (a=face_offset) a*angle_index[i+1].y],
+                    [for (a=face_angle) a*angle_index[i+1].y]
+                )
+                linear_extrude(height=0.01)
+                profile_slice(i+1);
+            }
             mixed_rotate_translate(
-                [for (a=face_offset) a*angle_index[i].y], 
-                [for (a=face_angle) a*angle_index[i].y]
-            )
-            linear_extrude(height=0.01)
-            profile_slice(i);
-            
-            mixed_rotate_translate(
-                [for (a=face_offset) a*angle_index[i+1].y],
-                [for (a=face_angle) a*angle_index[i+1].y]
-            )
-            linear_extrude(height=0.01)
-            profile_slice(i+1);
+                [for (a=face_offset) a*angle_index[length].y],
+                [for (a=face_angle) a*angle_index[length].y]
+            ) 
+            children();
         }
     }
     
@@ -64,21 +71,17 @@ module keycap_generic(width=[14, 2], r=[2, 4], slices=15, face_offset=[0, 0, 30]
         intersection() {
             children(0);
             scale([cavity*1.05, cavity*1.05, cavity])
-            basic_shape(slices-1);
+            basic_shape(slices-1) children(1);
         }
         
         difference() {
-            basic_shape(slices);
+            basic_shape(slices) children(1);
             if (slices > 1) {
                 scale([cavity, cavity, 1-(1-cavity)*0.5])
-                basic_shape(slices-1);
+                basic_shape(slices-1) children(1);
             } else {
                 scale([cavity, cavity, cavity])
-                basic_shape(slices);
-            }
-            
-            mixed_rotate_translate(face_offset, face_angle) {
-                children(1);
+                basic_shape(slices) children(1);
             }
         }
     }
