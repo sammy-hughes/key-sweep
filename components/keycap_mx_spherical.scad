@@ -1,5 +1,5 @@
-include <primitives/keycap_generic.scad>;
-include <primitives/post_mx.scad>;
+include <primitives/profiles/keycap_generic.scad>;
+include <primitives/stems/cherry/stem.scad>;
 
 module keycap_spherical_generic_base(face_offset=[0, 0, 5], face_angle=[0, 0, 0], dimple_depth=0.5, slices=5, cavity=0.9, unit=1.00) {
     base_width=14;
@@ -26,48 +26,48 @@ module keycap_spherical_generic_base(face_offset=[0, 0, 5], face_angle=[0, 0, 0]
 
 module keycap_mx_spherical_100u(face_offset=[0, 0, 5], face_angle=[0, 0, 0], dimple_depth=0.5, cavity=0.9) {
     keycap_spherical_generic_base(face_offset=face_offset, face_angle=face_angle, dimple_depth=dimple_depth, cavity=cavity, unit=1.00)
-    post_mx(height=face_offset.z);
+    post_cherry_1u(height=face_offset.z);
     children();
 }
 
 module keycap_mx_spherical_125u(face_offset=[0, 0, 5], face_angle=[0, 0, 0], dimple_depth=0.5, cavity=0.9) {
     keycap_spherical_generic_base(face_offset=face_offset, face_angle=face_angle, dimple_depth=dimple_depth, cavity=cavity, unit=1.25)
-    post_mx(height=face_offset.z);
+    post_cherry_1u(height=face_offset.z);
     children();
 }
 
 module keycap_mx_spherical_150u(face_offset=[0, 0, 5], face_angle=[0, 0, 0], dimple_depth=0.5, cavity=0.9) {
     keycap_spherical_generic_base(face_offset=face_offset, face_angle=face_angle, dimple_depth=dimple_depth, cavity=cavity, unit=1.50)
-    post_mx(height=face_offset.z);
+    post_cherry_1u(height=face_offset.z);
     children();
 }
 
 module keycap_mx_spherical_175u(face_offset=[0, 0, 5], face_angle=[0, 0, 0], dimple_depth=0.5, cavity=0.9) {
     keycap_spherical_generic_base(face_offset=face_offset, face_angle=face_angle, dimple_depth=dimple_depth, cavity=cavity, unit=1.75)
-    post_mx(height=face_offset.z);
+    post_cherry_1u(height=face_offset.z);
     children();
 }
 
 module keycap_mx_spherical_200u(face_offset=[0, 0, 5], face_angle=[0, 0, 0], dimple_depth=0.5, cavity=0.9) {
     keycap_spherical_generic_base(face_offset=face_offset, face_angle=face_angle, dimple_depth=dimple_depth, cavity=cavity, unit=2.00)
-    post_mx_2u(height=face_offset.z);
+    post_cherry_2u(height=face_offset.z);
     children();
 }
 
 module keycap_mx_spherical_225u(face_offset=[0, 0, 5], face_angle=[0, 0, 0], dimple_depth=0.5, cavity=0.9) {
     keycap_spherical_generic_base(face_offset=face_offset, face_angle=face_angle, dimple_depth=dimple_depth, cavity=cavity, unit=2.25)
-    post_mx_2u(height=face_offset.z);
+    post_cherry_2u(height=face_offset.z);
     children();
 }
 
 module keycap_mx_spherical_250u(face_offset=[0, 0, 5], face_angle=[0, 0, 0], dimple_depth=0.5, cavity=0.9) {
     keycap_spherical_generic_base(face_offset=face_offset, face_angle=face_angle, dimple_depth=dimple_depth, cavity=cavity, unit=2.50)
-    post_mx_2u(height=face_offset.z);
+    post_cherry_2u(height=face_offset.z);
     children();
 }
 
 module keycap_mx_spherical_275u(face_offset=[0, 0, 5], face_angle=[0, 0, 0], dimple_depth=0.5, cavity=0.9) {
     keycap_spherical_generic_base(face_offset=face_offset, face_angle=face_angle, dimple_depth=dimple_depth, cavity=cavity, unit=2.75)
-    post_mx_2u(height=face_offset.z);
+    post_cherry_2u(height=face_offset.z);
     children();
 }
