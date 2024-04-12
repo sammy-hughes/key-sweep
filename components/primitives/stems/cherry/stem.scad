@@ -3,7 +3,7 @@ include <stem_root.scad>
 include <stem_post.scad>
 include <stem_jack.scad>
 
-module post_cherry_1u(height=$STEM_CHERRY_DEFAULT_HEIGHT, breadth=$STEM_CHERRY_WING_BREADTH, thickness=$STEM_CHERRY_WING_THICKNESS) {
+module stem_cherry_1u(height=$STEM_CHERRY_DEFAULT_HEIGHT, breadth=$STEM_CHERRY_WING_BREADTH, thickness=$STEM_CHERRY_WING_THICKNESS) {
     assert(height>=3.6, "height must not be less than 3.6mm");
 
     diameter=breadth+thickness;
@@ -17,7 +17,7 @@ module post_cherry_1u(height=$STEM_CHERRY_DEFAULT_HEIGHT, breadth=$STEM_CHERRY_W
     }
 }
 
-module post_cherry_2u(height=$STEM_CHERRY_DEFAULT_HEIGHT, breadth=$STEM_CHERRY_WING_BREADTH, thickness=$STEM_CHERRY_WING_THICKNESS, spacing=$STEM_CHERRY_DEFAULT_SPACING) {
+module stem_cherry_2u(height=$STEM_CHERRY_DEFAULT_HEIGHT, breadth=$STEM_CHERRY_WING_BREADTH, thickness=$STEM_CHERRY_WING_THICKNESS, spacing=$STEM_CHERRY_DEFAULT_SPACING) {
     assert(spacing>-1, "spacing cannot be negative");
     assert(height>=3.6, "height must not be less than 3.6mm");
 
