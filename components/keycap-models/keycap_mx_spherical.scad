@@ -1,5 +1,5 @@
-include <primitives/profiles/keycap_generic.scad>;
-include <primitives/stems/cherry/stem.scad>;
+include <../primitives/profiles/keycap_generic.scad>;
+include <../primitives/stems/cherry/stem.scad>;
 
 module keycap_spherical_generic_base(face_offset=[0, 0, 5], face_angle=[0, 0, 0], dimple_depth=0.5, slices=5, cavity=0.9, unit=1.00) {
     base_width=14;
