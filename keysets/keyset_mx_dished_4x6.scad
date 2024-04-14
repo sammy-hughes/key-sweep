@@ -5,14 +5,6 @@ $fn=90;
 rows = 3;
 columns = 6;
 
-design=sweep_c20563a3(height=[5, 10], sweep_angle=[45, 45], sweep_shift=[0, 0], slices=[3, 6]);
-for (i=[0:columns-1])
-for (j=[0:rows-1]) {
-    echo(design[i][j]);
-    translate([i*20, j*-20, 0])
-    keycap_mx_spherical_100u(face_offset=[0, 0, 3.6+(design[i][j][1][0]+design[i][j][1][1])], face_angle=[design[i][j][0][0], design[i][j][0][1], 0]);
-}
-translate([0, 0, -40])
 for (i=[0:columns-1])
 for (j=[0:rows-1])
 translate([i*20, j*-20, 0]){
