@@ -7,7 +7,7 @@ function shift(sweep_shift) = (
 );
 
 function height_min(height, sweep_angle, sweep_shift) = (
-  height*0.25+height*0.75*pow(cos(sweep_angle+abs(sweep_shift)),4)
+  height*0.25+(height-height*sin(sweep_angle+abs(sweep_shift)))*cos(sweep_angle+abs(sweep_shift))*0.75
 );
 
 function sweep_slice(progress, sweep_shift) = (
@@ -19,14 +19,7 @@ function sweep_angle(sweep_progress, sweep_angle) = (
 );
 
 function sweep_height(sweep_progress, sweep_angle, sweep_shift,  height_max, height_min) = (
-  height_max-(height_max-height_min)*abs(
-    sin(
-      sweep_slice(
-        sweep_progress, 
-        sweep_shift
-      )
-    )
-  )
+  height_min+(height_max-height_min)*pow(abs(cos(sweep_slice(sweep_progress, sweep_shift))), 3)
 );
 
 function ratio_angle_progression(progression, sweep_shift) = (
@@ -35,7 +28,7 @@ function ratio_angle_progression(progression, sweep_shift) = (
 
 function angle_height_progression(progression, sweep_angle, sweep_shift, height_max, height_min) = [
   for (ra=progression) [
-    sweep_angle(ra[1], sweep_angle), 
+    sweep_angle(ra[1], sweep_angle),
     sweep_height(
       ra[0], 
       sweep_angle, 
