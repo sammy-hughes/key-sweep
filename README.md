@@ -2,6 +2,8 @@
 
 A multi-axis, concave typing experience on your good ol' planar keyboard!
 
+![they feel much nicer than they look!](github.com/sammy-hughes/key-sweep/blob/main/images/dished_3x6_split.jpg)
+
 This library is an OpenSCAD keycap generator that is designed around minimal-input, multi-axis typing surfaces. The library is intended to make concave "keywell" keyboard experiences more accessible. This is accomplished by implementing the various elements of a keycap as discrete primitives which can be composed as individual "novelty" keys, universal-profile (flat) keysets, single-axis contoured keysets, or multi-axis countoured keysets.
 
 Currently only the Cherry MX stem system is implemented, but this project has in-scope the following mounting systems:
