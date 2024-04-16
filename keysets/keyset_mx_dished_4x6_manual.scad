@@ -1,7 +1,7 @@
-include <../components/keycap_mx_spherical.scad>;
+include <../components/keycap-models/keycap_mx_spherical.scad>;
+include <../components/sweep-models/c20563a3/model.scad>;
 
 $fn=90;
-
 rows = 3;
 columns = 6;
 
