@@ -1,6 +1,10 @@
 include <config.scad>
 
-module post_cherry_stem_profile(breadth=$STEM_CHERRY_WING_BREADTH, thickness=$STEM_CHERRY_WING_THICKNESS, spacing=$STEM_CHERRY_BASE_SPACING) {
+module post_cherry_stem_profile(
+    breadth=$STEM_CHERRY_WING_BREADTH, 
+    thickness=$STEM_CHERRY_WING_THICKNESS, 
+    spacing=$STEM_CHERRY_BASE_SPACING
+) {
     assert(spacing>-1, "spacing cannot be negative");
     fudge = thickness*0.0625;
     
@@ -29,7 +33,12 @@ module post_cherry_stem_profile(breadth=$STEM_CHERRY_WING_BREADTH, thickness=$ST
     }
 }
 
-module post_cherry_stem_geometry(height=$STEM_CHERRY_BASE_HEIGHT, breadth=$STEM_CHERRY_WING_BREADTH, thickness=$STEM_CHERRY_WING_THICKNESS, spacing=$STEM_CHERRY_BASE_SPACING) {
+module post_cherry_stem_geometry(
+    height=$STEM_CHERRY_BASE_HEIGHT, 
+    breadth=$STEM_CHERRY_WING_BREADTH, 
+    thickness=$STEM_CHERRY_WING_THICKNESS, 
+    spacing=$STEM_CHERRY_BASE_SPACING
+) {
     assert(spacing>-1, "spacing cannot be negative");
     
     if (spacing == 0) {
