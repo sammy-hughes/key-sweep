@@ -15,8 +15,9 @@ progress and intended scope:
 - [~] Vertical offsets for stems to enable keycap shrouding and low-profile keycaps
 - [~] Sacrificial build-surface interfaces to negate any detriment to tolerances from auto-generated supports
 - Provide flexible, parametric sweep models
-    - [x] Single-lobe spherical sweep for slit or left/right half ortholinear layouts
-    - [ ] Dual-lobe spherical sweep for traditional keyboards, allowing for left/right hand keywells
+    - [x] Single-lobe spherical sweep for split or left/right half ortholinear layouts
+    - [x] Single-lobe, bi-modal sweep for keywell emulation on split/ortho layouts
+    - [ ] Dual-lobe spherical sweep for traditional keyboards, allowing for left/right hand keywells.
     - [ ] Multi-modal sweeps with keymasks to implement offset thumb clusters or v-splits on monolithic keyboards
 - Stem compatibility
     - [x] Cherry MX
