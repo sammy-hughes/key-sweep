@@ -17,7 +17,7 @@ progress and intended scope:
 - Provide flexible, parametric sweep models
     - [x] Single-lobe spherical sweep for slit or left/right half ortholinear layouts
     - [ ] Dual-lobe spherical sweep for traditional keyboards, allowing for left/right hand keywells
-    - [~] >3-axis sweeps for converting monolithic, planar keyboards to canted, split-curve typing surfaces
+    - [ ] Multi-modal sweeps with keymasks to implement offset thumb clusters or v-splits on monolithic keyboards
 - Stem compatibility
     - [x] Cherry MX
     - [ ] Kailh Choc v1
