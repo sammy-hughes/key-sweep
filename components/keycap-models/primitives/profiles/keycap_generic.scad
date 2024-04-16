@@ -62,8 +62,8 @@ module keycap_generic(width=[14, 2], r=[2, 4], slices=15, face_offset=[0, 0, 30]
         if ($children > 0) {
             intersection() {
                 children(0);
-                scale([cavity*1.05, cavity*1.05, cavity])
-                basic_shape(slices-1) children(1);
+                scale([cavity*1.05, cavity*1.05, cavity*1.05])
+                basic_shape(slices) children(1);
             }
         }
         

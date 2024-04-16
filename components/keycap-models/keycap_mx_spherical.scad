@@ -1,5 +1,5 @@
-include <../primitives/profiles/keycap_generic.scad>;
-include <../primitives/stems/cherry/stem.scad>;
+include <primitives/profiles/keycap_generic.scad>;
+include <primitives/stems/cherry/stem.scad>;
 
 $BASE_WIDTH=14;
 $FACE_WIDTH=2;
