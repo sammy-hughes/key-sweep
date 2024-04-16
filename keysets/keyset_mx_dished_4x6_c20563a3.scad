@@ -5,7 +5,7 @@ $fn=45;
 rows = 3;
 columns = 6;
 
-design=sweep_c20563a3(height=15, sweep_angle=[30, 30], sweep_shift=[0, 0], slices=[6, 4]);
+design=sweep_c20563a3(height=22, sweep_angle=[30, 30], sweep_shift=[0, 0], slices=[6, 4]);
 for (i=[0:len(design)-1])
 for (j=[0:len(design[0])-1]) {
     translate([i*19, j*-19, 0])
