@@ -1,7 +1,7 @@
 include <config.scad>
 include <stem_post.scad>
 
-module post_cherry_root_well(width=$STEM_CHERRY_KEY_WIDTH, height=$STEM_CHERRY_DEFAULT_HEIGHT , breadth=$STEM_CHERRY_WING_BREADTH, thickness=$STEM_CHERRY_WING_THICKNESS, spacing=$STEM_CHERRY_DEFAULT_SPACING) {
+module post_cherry_root_well(width=$STEM_CHERRY_KEY_WIDTH, height=$STEM_CHERRY_BASE_HEIGHT , breadth=$STEM_CHERRY_WING_BREADTH, thickness=$STEM_CHERRY_WING_THICKNESS, spacing=$STEM_CHERRY_BASE_SPACING) {
     assert(spacing>-1, "spacing cannot be negative");
 
     module base_geometry(scale=width/breadth) {
@@ -48,7 +48,7 @@ module post_cherry_root_well(width=$STEM_CHERRY_KEY_WIDTH, height=$STEM_CHERRY_D
     }
 }
 
-module post_cherry_vent_profile(breadth=$STEM_CHERRY_WING_BREADTH, thickness=$STEM_CHERRY_WING_THICKNESS, spacing=$STEM_CHERRY_DEFAULT_SPACING) {
+module post_cherry_vent_profile(breadth=$STEM_CHERRY_WING_BREADTH, thickness=$STEM_CHERRY_WING_THICKNESS, spacing=$STEM_CHERRY_BASE_SPACING) {
     assert(spacing>-1, "spacing cannot be negative");
 
     module base_profile() {
@@ -72,7 +72,7 @@ module post_cherry_vent_profile(breadth=$STEM_CHERRY_WING_BREADTH, thickness=$ST
     }
 }
 
-module post_cherry_root_geometry(width=$STEM_CHERRY_KEY_WIDTH, height=$STEM_CHERRY_DEFAULT_HEIGHT, breadth=$STEM_CHERRY_WING_BREADTH, thickness=$STEM_CHERRY_WING_THICKNESS, spacing=$STEM_CHERRY_DEFAULT_SPACING) {
+module post_cherry_root_geometry(width=$STEM_CHERRY_KEY_WIDTH, height=$STEM_CHERRY_BASE_HEIGHT, breadth=$STEM_CHERRY_WING_BREADTH, thickness=$STEM_CHERRY_WING_THICKNESS, spacing=$STEM_CHERRY_BASE_SPACING) {
     assert(spacing>-1, "spacing cannot be negative");
     
     difference() {

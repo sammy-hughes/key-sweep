@@ -1,7 +1,7 @@
 include <config.scad>
 include <stem_post.scad>
 
-module stem_jack(height=$STEM_CHERRY_DEFAULT_HEIGHT, breadth=$STEM_CHERRY_WING_BREADTH, thickness=$STEM_CHERRY_WING_THICKNESS, spacing=$STEM_CHERRY_DEFAULT_SPACING, tine_angle=12) {
+module stem_jack(height=$STEM_CHERRY_BASE_HEIGHT, breadth=$STEM_CHERRY_WING_BREADTH, thickness=$STEM_CHERRY_WING_THICKNESS, spacing=$STEM_CHERRY_BASE_SPACING, tine_angle=12) {
     base_width=breadth+thickness;
     overlap_height=2;
     base_height=height+overlap_height;
