@@ -37,8 +37,8 @@ module stem_cherry_2u(
     union() {
         stem_jack(height=lift, breadth=breadth, thickness=thickness, spacing=spacing, tine_angle=12);
         translate([0, 0, lift])
-        post_cherry_root_geometry(height=(height-$STEM_CHERRY_BASE_HEIGHT), breadth=breadth, thickness=thickness, spacing=spacing);
-        translate([0, 0, lift+$STEM_CHERRY_BASE_HEIGHT])
         post_cherry_stem_geometry(height=$STEM_CHERRY_BASE_HEIGHT, breadth=breadth, thickness=thickness, spacing=spacing);
+        translate([0, 0, lift+$STEM_CHERRY_BASE_HEIGHT])
+        post_cherry_root_geometry(height=(height-$STEM_CHERRY_BASE_HEIGHT), breadth=breadth, thickness=thickness, spacing=spacing);   
     }
 }

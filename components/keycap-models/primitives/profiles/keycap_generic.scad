@@ -1,3 +1,7 @@
+CHILD_STEM=0;
+CHILD_DIMPLE=1;
+
+
 module keycap_generic(width=[14, 2], r=[2, 4], slices=15, face_offset=[0, 0, 30], face_angle=[37.5, 0, 0], cavity=0.90, unit=1.00) {
     d1 = width[0]+r[0]*2;
     assert(d1<=18, "primary size must not be greater than 18mm to fit MX spacing");
@@ -50,7 +54,7 @@ module keycap_generic(width=[14, 2], r=[2, 4], slices=15, face_offset=[0, 0, 30]
                 linear_extrude(height=0.01)
                 profile_slice(i+1);
             }
-            
+
             translate([for (a=face_offset) a*angle_index[length].x*0.5])
             rotate([for (a=face_angle) a*angle_index[length].x])
             translate([for (a=face_offset) a*angle_index[length].x*0.5])
@@ -59,23 +63,30 @@ module keycap_generic(width=[14, 2], r=[2, 4], slices=15, face_offset=[0, 0, 30]
     }
     
     union() {
-        if ($children > 0) {
+        if ($children > CHILD_STEM) {
             intersection() {
-                children(0);
-                scale([cavity*1.05, cavity*1.05, cavity*1.05])
-                basic_shape(slices) children(1);
+                children(CHILD_STEM);
+                scale([cavity, cavity, cavity])
+                basic_shape(slices) 
+                if ($children > CHILD_DIMPLE)
+                children(CHILD_DIMPLE);
             }
         }
         
         difference() {
-            basic_shape(slices) if ($children > 0) children(1);
-            if (slices > 1) {
-                scale([cavity, cavity, 1-(1-cavity)*0.5])
-                basic_shape(slices-1) if ($children > 0) children(1);
-            } else {
-                scale([cavity, cavity, cavity])
-                basic_shape(slices) if ($children > 0) children(1);
-            }
+            basic_shape(slices) 
+            if ($children > CHILD_DIMPLE) 
+            children(CHILD_DIMPLE);
+            scale([cavity, cavity, cavity])
+            basic_shape(slices) 
+            if ($children > CHILD_DIMPLE) 
+            children(CHILD_DIMPLE);
+            
+            if ($children > CHILD_DIMPLE+1)
+            translate([for (a=face_offset) a*angle_index[slices-1].x*0.5])
+            rotate([for (a=face_angle) a*angle_index[slices-1].x])
+            translate([for (a=face_offset) a*angle_index[slices-1].x*0.5])
+            children([CHILD_DIMPLE+1:$children-1]);
         }
     }
 }

@@ -9,7 +9,7 @@ module stem_jack(
     tine_angle=12
 ) {
     base_width=breadth+thickness;
-    overlap_height=2;
+    overlap_height=height*0.25;
     base_height=height+overlap_height;
     
     module base_geometry() {
