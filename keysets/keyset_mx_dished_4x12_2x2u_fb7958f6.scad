@@ -51,8 +51,9 @@ module print_symbol(base_symbol, size=4, depth=0.5, fit_to_size=16) {
         translate([i*actual_size*0.25, 0, 0])
         sphere(d=fit_to_size*2);
       }
-      linear_extrude(height=fit_to_size*2, scale=1.25, center=true)
-      scale([0.8, 0.8, 1])
+      linear_extrude(height=fit_to_size*2, center=true)
+      offset(r=0.125, chamfer=true)
+      offset(delta=0.25, chamfer=true)
       if (actual_size > fit_to_size) {
           text(base_symbol, size*fit_to_size/actual_size, halign="center", valign="center");
       } else {
@@ -62,7 +63,7 @@ module print_symbol(base_symbol, size=4, depth=0.5, fit_to_size=16) {
 }
 
 
-design_a=sweep_fb7958f6(height=15, sweep_angle=[30, 22.5], sweep_shift=[0, 0], slices=[columns, rows]);
+design_a=sweep_fb7958f6(height=20, sweep_angle=[30, 22.5], sweep_shift=[0, 0], slices=[columns, rows]);
 translate([-70, -105, 0])
 rotate([0, 0, 90])
 for (i=[0:len(design_a)-1])
@@ -73,7 +74,7 @@ for (j=[0:len(design_a[0])-1]) {
         j==3 && i>1 && i<4? abs(design_a[i][j][0][0]*3): 
         j==3 && i>3? -design_a[i][j][0][0]:
         design_a[i][j][0][1]
-      ), ( 
+      ), (j==3?0.75:1)*( 
         j==3 && i>1 && i<4? 0:
         j==3 && i>3? design_a[i][j][0][1]*0.5: design_a[i][j][0][0]
       ),
@@ -82,18 +83,18 @@ for (j=[0:len(design_a[0])-1]) {
 
     if (keyset_unit_a(i, j) == 2) {
         translate([i*19+19*0.5, j*-19, 0])
-        keycap_mx_spherical_200u(face_offset=param_offset, face_angle=param_angle, dimple_depth=1, slices=30, lift=3, cavity=0.92)
+        keycap_mx_spherical_200u(face_offset=param_offset, face_angle=param_angle, dimple_depth=1, slices=30, lift=1.4, cavity=0.92)
         print_symbol(keyset_symbol_a(i, j), depth=0.75);
     } else if (keyset_unit_a(i, j) == 1) {
         translate([i*19, j*-19, 0])
-        keycap_mx_spherical_100u(face_offset=param_offset, face_angle=param_angle, dimple_depth=1, slices=30, lift=3, cavity=0.92)
+        keycap_mx_spherical_100u(face_offset=param_offset, face_angle=param_angle, dimple_depth=1, slices=30, lift=1.4, cavity=0.92)
         print_symbol(keyset_symbol_a(i, j), depth=0.75);
     } else {
         // do nothing
     }
 }
 
-design_b=sweep_fb7958f6(height=15, sweep_angle=[30, 22.5], sweep_shift=[0, 0], slices=[columns, rows]);
+design_b=sweep_fb7958f6(height=20, sweep_angle=[30, 22.5], sweep_shift=[0, 0], slices=[columns, rows]);
 translate([70, -10, 0])
 rotate([0, 0, -90])
 for (i=[0:len(design_b)-1])
@@ -104,7 +105,7 @@ for (j=[0:len(design_b[0])-1]) {
         j==3 && i>1 && i<4? abs(design_b[i][j][0][0]*3): 
         j==3 && i<2? abs(design_b[i][j][0][0]):
         design_b[i][j][0][1]
-      ), ( 
+      ), (j==3?0.75:1)*( 
         j==3 && i>1 && i<4? 0:
         j==3 && i<2? -design_b[i][j][0][1]*0.5: design_b[i][j][0][0]
       ),
@@ -113,11 +114,11 @@ for (j=[0:len(design_b[0])-1]) {
     
     if (keyset_unit_b(i, j) == 2) {
         translate([i*19+-19*0.5, j*-19, 0])
-        keycap_mx_spherical_200u(face_offset=param_offset, face_angle=param_angle, dimple_depth=1, slices=30, lift=3, cavity=0.92)
+        keycap_mx_spherical_200u(face_offset=param_offset, face_angle=param_angle, dimple_depth=1, slices=30, lift=1.4, cavity=0.92)
         print_symbol(keyset_symbol_b(i, j), depth=0.75);
     } else if (keyset_unit_b(i, j) == 1) {
         translate([i*19, j*-19, 0])
-        keycap_mx_spherical_100u(face_offset=param_offset, face_angle=param_angle, dimple_depth=1, slices=30, lift=3, cavity=0.92)
+        keycap_mx_spherical_100u(face_offset=param_offset, face_angle=param_angle, dimple_depth=1, slices=30, lift=1.4, cavity=0.92)
         print_symbol(keyset_symbol_b(i, j), depth=0.75);
     } else {
         // do nothing
