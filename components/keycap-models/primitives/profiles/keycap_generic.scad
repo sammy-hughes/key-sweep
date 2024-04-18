@@ -19,8 +19,15 @@ module keycap_generic(width=[14, 2], r=[2, 4], slices=15, face_offset=[0, 0, 30]
     
     module profile_slice(i) {
         module shape() {
-            offset(r=r_slice(i))
-            square(size=width_slice(i), center=true);
+          chamfer_factor = (
+            i==0? 0.95:
+            i==1? 0.97:
+            i==2? 0.99:
+            1.0
+          );
+          
+          offset(r=r_slice(i)*(chamfer_factor+(1-chamfer_factor)*0.5))
+          square(size=width_slice(i)*chamfer_factor, center=true);
         }
         
         if (unit == 1) {
@@ -79,7 +86,9 @@ module keycap_generic(width=[14, 2], r=[2, 4], slices=15, face_offset=[0, 0, 30]
             children(CHILD_DIMPLE);
             scale([cavity, cavity, cavity])
             basic_shape(slices) 
-            if ($children > CHILD_DIMPLE) 
+            if ($children > CHILD_DIMPLE)
+            scale([8, 8, 2])
+            translate([0, 0, 0])
             children(CHILD_DIMPLE);
             
             if ($children > CHILD_DIMPLE+1)
