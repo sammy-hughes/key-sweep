@@ -2,60 +2,65 @@ include <config.scad>
 
 module post_cherry_stem_profile(
     breadth=$STEM_CHERRY_WING_BREADTH, 
-    thickness=$STEM_CHERRY_WING_THICKNESS, 
-    spacing=$STEM_CHERRY_BASE_SPACING
+    thickness=$STEM_CHERRY_WING_THICKNESS
 ) {
-    assert(spacing>-1, "spacing cannot be negative");
-    fudge = thickness*0.0625;
-    
-    module base_profile() {
-        offset(r=fudge*2)
-        offset(delta=-fudge*2, chamfer=true)
-        difference() {
-            circle(d=breadth+thickness);
-            
-            offset(r=fudge*2)
-            offset(delta=-fudge*2, chamfer=true)
-            square([breadth+fudge, thickness+fudge], center=true);
-            
-            offset(r=fudge*2)
-            offset(delta=-fudge*2, chamfer=true)
-            square([thickness+fudge, breadth+fudge], center=true);
-        }
-    }
-    
-    if (spacing == 0) {
-        base_profile();
-    } else if (spacing <=15) {
-        for (i=[-1:1:1])
-        translate([i*spacing, 0, 0])
-        base_profile();
-    }
-}
+  fudge = thickness*0.0625;
 
+  offset(r=fudge*2)
+  offset(delta=-fudge*2, chamfer=true)
+  difference() {
+    circle(d=breadth+thickness);
+    
+    offset(r=fudge*2)
+    offset(delta=-fudge*2, chamfer=true)
+    square([breadth+fudge, thickness+fudge], center=true);
+    
+    offset(r=fudge*2)
+    offset(delta=-fudge*2, chamfer=true)
+    square([thickness+fudge, breadth+fudge], center=true);
+  }
+}
+$fn=90;
 module post_cherry_stem_geometry(
     height=$STEM_CHERRY_BASE_HEIGHT, 
     breadth=$STEM_CHERRY_WING_BREADTH, 
     thickness=$STEM_CHERRY_WING_THICKNESS, 
-    spacing=$STEM_CHERRY_BASE_SPACING
+    spacing=$STEM_CHERRY_BASE_SPACING,
+    lift=$STEM_CHERRY_BASE_LIFT
 ) {
-    assert(spacing>-1, "spacing cannot be negative");
-    
-    if (spacing == 0) {
-        difference() {
-            linear_extrude(height=height)
-            post_cherry_stem_profile(breadth=breadth, thickness=thickness, spacing=spacing);
-
-            cylinder(h=0.5, d1=breadth, d2=thickness);
-        }
-    } else if (spacing <= 15) {
-        difference() {
-            linear_extrude(height=height)
-            post_cherry_stem_profile(breadth=breadth, thickness=thickness, spacing=spacing);
-            
-            for (i=[-1:1:1])
-            translate([i*spacing, 0, 0])
-            cylinder(h=0.5, d1=breadth, d2=thickness);
-        }
+  assert(spacing>-1, "spacing cannot be negative");
+  assert(lift>-1, "lift cannot be negative");
+  assert(height>=3.6, "height must not be less than 3.6mm");
+  assert(height-lift>=3.2, "height must exceed lift by at least 3.2mm");
+  
+  module boot() {
+    translate([0, 0, lift])
+    mirror([0,0,1])
+    difference() {
+      linear_extrude(height=lift, scale=2)
+      offset(delta=-thickness*0.125)
+      scale([1.0625, 1.0625, 1])
+      post_cherry_stem_profile(breadth=breadth, thickness=thickness);
+      cylinder(h=0.5, d1=breadth, d2=thickness);
     }
+  }
+  
+  module base_geometry() {
+    if (lift>0) boot();
+    translate([0, 0, lift])
+    difference() {
+      linear_extrude(height=height-lift)
+      post_cherry_stem_profile(breadth=breadth, thickness=thickness);
+
+      cylinder(h=0.5, d1=breadth, d2=thickness);
+    }
+  }
+  
+  if (spacing == 0) {
+    base_geometry();
+  } else if (spacing <=15) {
+    for (i=[-1:1:1])
+    translate([i*spacing, 0, 0])
+    base_geometry();
+  }
 }
