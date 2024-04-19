@@ -37,10 +37,16 @@ module post_cherry_stem_geometry(
     translate([0, 0, lift])
     mirror([0,0,1])
     difference() {
-      linear_extrude(height=lift, scale=2)
-      offset(delta=-thickness*0.125)
-      scale([1.0625, 1.0625, 1])
-      post_cherry_stem_profile(breadth=breadth, thickness=thickness);
+      intersection() {
+        for (i=[-1:2:1]) {
+          rotate([0, 0, i*9])
+          translate([i*thickness*0.0875, i*thickness*0.0875, 0])
+          linear_extrude(height=lift, scale=2)
+          offset(delta=-thickness*0.125)
+          scale([1.0625, 1.0625, 1])
+          post_cherry_stem_profile(breadth=breadth, thickness=thickness);
+        }
+      }
       cylinder(h=0.5, d1=breadth, d2=thickness);
     }
   }

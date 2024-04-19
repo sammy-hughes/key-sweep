@@ -36,10 +36,10 @@ module post_cherry_root_well(
       difference() {
         base_geometry();
         
-        translate([0, 0, thickness*0.66])
+        translate([0, 0, thickness])
         base_geometry();
         
-        linear_extrude(height=thickness*0.66)
+        linear_extrude(height=thickness)
         circle(d=breadth+thickness);
       }
         
@@ -51,13 +51,13 @@ module post_cherry_root_well(
         translate([spacing*i, 0, 0])
         base_geometry();
         
-        translate([0, 0, thickness*0.66])
+        translate([0, 0, thickness])
         hull()
         for (i=[-1:2:1])
         translate([spacing*i, 0, 0])
         base_geometry();
         
-        linear_extrude(height=thickness*0.66)
+        linear_extrude(height=thickness)
         for (i=[-1:1:1])
         translate([spacing*i, 0, 0])
         circle(d=breadth+thickness);
