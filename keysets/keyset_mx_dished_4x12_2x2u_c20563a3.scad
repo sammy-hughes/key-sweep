@@ -40,7 +40,7 @@ function keyset_symbol_b(i, j) = (
     [j, i] == [3, 0]? "":
     keyset_symbol_source_b[j][i]
 );
-module print_symbol(base_symbol, size=4, depth=0.5, fit_to_size=16) {
+module print_symbol(base_symbol, size=4, depth=0.5, fit_to_size=16, cavity=0.9) {
     actual_size = len(base_symbol)*size;
     
     module base_symbol() {
@@ -51,13 +51,13 @@ module print_symbol(base_symbol, size=4, depth=0.5, fit_to_size=16) {
       }
     }
     
-    translate([0, 0, -depth])
+    translate([0, 0, -(depth*0.5)])
     intersection() {
-      scale([1, 0.5, 0.25])
+      scale([1, 1, 0.125])
       hull()
       if (actual_size>size) {
         for (i=[-1:1:1])
-        translate([i*actual_size/3, 0, abs(i)*depth*0.5])
+        translate([i*actual_size/1.6, 0, abs(i)*size])
         sphere(d=size*2);
       } else {
         sphere(d=size*2);
@@ -78,11 +78,15 @@ function adjustments(i, j, angle, offset) = (
     ]:
     i==2? [
       [-angle[0]*0.5, 0, -angle[2]],
-      [-offset[0], -offset[1], offset[2]*0.5]
+      [-offset[0]*1.25, -offset[1], offset[2]*0.5]
     ]:
     i==3? [
-      [-angle[0]*0.5, -angle[1]*3, -angle[2]*1.5],
-      [-offset[0], -offset[1]*2, offset[2]*0.75]
+      [-angle[0]*1, -angle[1]*4, -angle[2]*1.75],
+      [-offset[0]*0.50, -offset[1]*2.5, offset[2]*0.75]
+    ]:// n
+    i==4? [
+      [-angle[0]*1.75, angle[1]*22.5, -angle[2]*5],
+      [ offset[0]*1.25, -offset[1]*7, offset[2]*1.75]
     ]:
     [angle, offset]
   ): i==2||i==3? [
@@ -103,83 +107,74 @@ function ensure_lift_height_ok(height, lift) = (
 
 design_a=sweep_c20563a3(height=20, sweep_angle=[37.5, 37.5], sweep_shift=[52.5, 0], slices=[columns, rows]);
 design_b=sweep_c20563a3(height=20, sweep_angle=[37.5, 37.5], sweep_shift=[-52.5, 0], slices=[columns, rows]);
-difference() {
-  translate([-73, -105, 0])
-  rotate([0, 0, 90])
-  union() {
-    for (i=[0:len(design_a)-1])
-    for (j=[0:len(design_a[0])-1]) {
-      base = adjustments(
-        (columns-i-1),
-        j,
-        [
-          design_a[i][j][0][1],
-          design_a[i][j][0][0],
-          -((columns-i-1)*3)
-        ],
-        [
-          -(columns-i-1)*1+-(rows-j-1)*0.125, 
-          -3+(columns-i-1)*1+(rows-j-1)*0.25,
-          design_a[i][j][1]
-        ]
-      );
-      param_offset=[base[1].x, base[1].y, ensure_lift_height_ok(base[1].z, stem_lift)];
-      param_angle=base[0];
 
-      if (keyset_unit_a(i, j) == 2) {
-        translate([i*19+19*0.5, j*-19, 0])
-        keycap_mx_spherical_200u(face_offset=param_offset, face_angle=param_angle, dimple_depth=0.5, slices=30, lift=stem_lift, cavity=0.92)
-        print_symbol(keyset_symbol_a(i, j), depth=1);
-      } else if (keyset_unit_a(i, j) == 1) {
-        translate([i*19, j*-19, 0])
-        keycap_mx_spherical_100u(face_offset=param_offset, face_angle=param_angle, dimple_depth=0.5, slices=30, lift=stem_lift, cavity=0.92)
-        print_symbol(keyset_symbol_a(i, j), depth=1);
-      } else {
-        // do nothing
-      }
-    }
-  }
-
-//cube([120, 120, 8], center=true);
-}
-
-difference() {
-
-translate([73, -10, 0])
-rotate([0, 0, -90])
+//translate([-80, -109, 0])
+//rotate([0, 0, 90])
 union() {
-for (i=[0:len(design_b)-1])
-for (j=[0:len(design_b[0])-1]) {
+  for (i=[0:len(design_a)-1])
+  for (j=[0:len(design_a[0])-1]) {
     base = adjustments(
-      i,
+      (columns-i-1),
       j,
       [
-        design_b[i][j][0][1],
-        design_b[i][j][0][0],
-        (i*3)
+        design_a[i][j][0][1],
+        design_a[i][j][0][0],
+        -((columns-i-1)*3)
       ],
       [
-        (i)*0.75+(rows-j-1)*0.125, 
-        -3+(i)*1+(rows-j-1)*0.25,
-        design_b[i][j][1]
+        -(columns-i-1)*1+-(rows-j-1)*0.125, 
+        -3+(columns-i-1)*1+(rows-j-1)*0.25,
+        design_a[i][j][1]
       ]
     );
     param_offset=[base[1].x, base[1].y, ensure_lift_height_ok(base[1].z, stem_lift)];
     param_angle=base[0];
-    
-    if (keyset_unit_b(i, j) == 2) {
-        translate([i*19+-19*0.5, j*-19, 0])
-        keycap_mx_spherical_200u(face_offset=param_offset, face_angle=param_angle, dimple_depth=0.5, slices=30, lift=stem_lift, cavity=0.92)
-        print_symbol(keyset_symbol_b(i, j), depth=1);
-    } else if (keyset_unit_b(i, j) == 1) {
-        translate([i*19, j*-19, 0])
-        keycap_mx_spherical_100u(face_offset=param_offset, face_angle=param_angle, dimple_depth=0.5, slices=30, lift=stem_lift, cavity=0.92)
-        print_symbol(keyset_symbol_b(i, j), depth=1);
+
+    if (keyset_unit_a(i, j) == 2) {
+      translate([i*19+19*0.5, j*-19, 0])
+      keycap_mx_spherical_200u(face_offset=param_offset, face_angle=param_angle, dimple_depth=1, slices=30, lift=stem_lift, cavity=0.85)
+      print_symbol(keyset_symbol_a(i, j), depth=2.5, cavity=0.85);
+    } else if (keyset_unit_a(i, j) == 1) {
+      translate([i*19, j*-19, 0])
+      keycap_mx_spherical_100u(face_offset=param_offset, face_angle=param_angle, dimple_depth=1, slices=30, lift=stem_lift, cavity=0.85)
+      print_symbol(keyset_symbol_a(i, j), depth=2.5, cavity=0.85);
     } else {
-        // do nothing
+      // do nothing
     }
-}
+  }
 }
 
-//cube([120, 120, 12], center=true);
+//translate([-80, 05, 0])
+//rotate([0, 0, 90])
+translate([0, -84, 0])
+for (i=[0:len(design_b)-1])
+for (j=[0:len(design_b[0])-1]) {
+  base = adjustments(
+    i,
+    j,
+    [
+      design_b[i][j][0][1],
+      design_b[i][j][0][0],
+      (i*3)
+    ],
+    [
+      (i)*0.75+(rows-j-1)*0.125, 
+      -3+(i)*1+(rows-j-1)*0.25,
+      design_b[i][j][1]
+    ]
+  );
+  param_offset=[base[1].x, base[1].y, ensure_lift_height_ok(base[1].z, stem_lift)];
+  param_angle=base[0];
+  
+  if (keyset_unit_b(i, j) == 2) {
+      translate([i*19+-19*0.5, j*-19, 0])
+      keycap_mx_spherical_200u(face_offset=param_offset, face_angle=param_angle, dimple_depth=1, slices=30, lift=stem_lift, cavity=0.85)
+      print_symbol(keyset_symbol_b(i, j), depth=2.5, cavity=0.85);
+  } else if (keyset_unit_b(i, j) == 1) {
+      translate([i*19, j*-19, 0])
+      keycap_mx_spherical_100u(face_offset=param_offset, face_angle=param_angle, dimple_depth=1, slices=30, lift=stem_lift, cavity=0.85)
+      print_symbol(keyset_symbol_b(i, j), depth=2.5, cavity=0.85);
+  } else {
+      // do nothing
+  }
 }
