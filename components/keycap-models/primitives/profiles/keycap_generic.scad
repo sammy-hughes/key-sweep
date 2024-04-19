@@ -20,9 +20,9 @@ module keycap_generic(width=[14, 2], r=[2, 4], slices=15, face_offset=[0, 0, 30]
     module profile_slice(i) {
         module shape() {
           chamfer_factor = (
-            i==0? 0.95:
-            i==1? 0.97:
-            i==2? 0.99:
+            i==0? 0.98:
+            i==1? 0.999:
+            i==2? 0.9999:
             1.0
           );
           
