@@ -11,7 +11,7 @@ function shift(sweep_shift) = (
 );
 
 function height_min(height, sweep_angle, sweep_shift) = (
-  height*0.25+cos(sweep_angle+abs(sweep_shift))*0.75
+  cos(sweep_angle+abs(sweep_shift))
 );
 
 function sweep_slice(progress, sweep_shift) = (

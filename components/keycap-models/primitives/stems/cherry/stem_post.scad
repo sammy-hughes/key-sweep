@@ -4,20 +4,20 @@ module post_cherry_stem_profile(
     breadth=$STEM_CHERRY_WING_BREADTH, 
     thickness=$STEM_CHERRY_WING_THICKNESS
 ) {
-  fudge = thickness*0.0625;
 
-  offset(r=fudge*2)
-  offset(delta=-fudge*2, chamfer=true)
+
+  offset(r=thickness*0.125)
+  offset(delta=-thickness*0.125, chamfer=true)
   difference() {
     circle(d=breadth+thickness);
     
-    offset(r=fudge*2)
-    offset(delta=-fudge*2, chamfer=true)
-    square([breadth+fudge, thickness+fudge], center=true);
+    offset(r=thickness*0.125)
+    offset(delta=-thickness*0.125, chamfer=true)
+    square([breadth, thickness], center=true);
     
-    offset(r=fudge*2)
-    offset(delta=-fudge*2, chamfer=true)
-    square([thickness+fudge, breadth+fudge], center=true);
+    offset(r=thickness*0.125)
+    offset(delta=-thickness*0.125, chamfer=true)
+    square([thickness, breadth], center=true);
   }
 }
 $fn=90;
