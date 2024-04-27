@@ -82,24 +82,25 @@ module keycap_generic(width=[14, 2], r=[2, 4], slices=15, face_offset=[0, 0, 30]
   
   module surface_shape(length=slices) {
     rounding=with_round_off_2nd_order(length, 75);
-    bevel=with_bottom_inset_bevel(round(length*0.125), 0.0125);
+    bevel=with_bottom_inset_bevel(round(length*0.25), 0.025);
     basic_shape(length, [for (i=[0:length]) bevel(i)*rounding(i)])
     children();
   }
   
   module cavity_shape(length=slices) {
     rounding=with_round_off_2nd_order(length, 90);
-    bevel_a = with_bottom_outset_bevel(round(length*0.25), 0.0625);
-    bevel_b = with_bottom_inset_bevel(round(length*0.0625), 0.0625);
-  
+    bevel_a = with_bottom_outset_bevel(round(length*0.95), 0.025*cavity);
+    bevel_b = with_bottom_inset_bevel(round(length*0.25), 0.025*cavity);
+    function final_bevel(i) = bevel_a(i)*bevel_b(i);
+    
     scale([cavity, cavity, 1])
     intersection() {
       scale([1, 1, 1.05])
-      basic_shape(length, [for (i=[0:length]) bevel_a(i)*bevel_b(i)*pow(rounding(i), 1.5)])
+      basic_shape(length, [for (i=[0:length]) final_bevel(i)*pow(rounding(i), 1.5)])
       scale([1/cavity, 1/cavity, 1/cavity])
       children();
       scale([1, 1, cavity])
-      basic_shape(floor(length*cavity), [for (i=[0:length]) bevel_a(i)*bevel_b(i)*pow(rounding(i), 1.5)])
+      basic_shape(floor(length*cavity), [for (i=[0:length]) final_bevel(i)*pow(rounding(i), 1.5)])
       scale([3/cavity, 3/cavity, 1/cavity])
       children();
     }

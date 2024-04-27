@@ -11,7 +11,7 @@ module post_cherry_root_well(
   assert(spacing>-1, "spacing cannot be negative");
 
   module base_geometry() {
-    scale_factor=height/(breadth+thickness)*2;
+    scale_factor=3+height/(breadth+thickness);
     hull()
     linear_extrude(height=height, scale=scale_factor)
     offset(r=thickness*2)

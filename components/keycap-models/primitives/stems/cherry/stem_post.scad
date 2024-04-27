@@ -31,7 +31,7 @@ module post_cherry_stem_geometry(
   assert(spacing>-1, "spacing cannot be negative");
   assert(lift>-1, "lift cannot be negative");
   assert(height>=3.6, "height must not be less than 3.6mm");
-  assert(height-lift>=3.2, "height must exceed lift by at least 3.2mm");
+  assert(height-lift>=3.6, "height must exceed lift by at least 3.6mm");
   
   module boot() {
     translate([0, 0, lift])
