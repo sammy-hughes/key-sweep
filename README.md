@@ -8,15 +8,21 @@ This library is an OpenSCAD keycap generator that is designed around minimal-inp
 
 ## Models
 
-### Keebio Chiri
-
-<img src="https://github.com/sammy-hughes/key-sweep/blob/main/images/dished_3x6_split.jpg" width="360" />
-
 ### Keebio Iris
+
+The classic Iris layout from Keeb.io. There could hardly be a more perfect starter, for someone wanting to dip their feet into the split pool. This model has a 12.25 degree sweep along the X and Y axes, but with a 15 degree shift towards the top. The F-key row is sloped off, because I secretly wanted the Chiri to start with.
 
 <img src="https://github.com/sammy-hughes/key-sweep/blob/main/images/keebio-iris-v7.jpg" width="360" />
 
+### Keebio Chiri
+
+Technically, this is actually just an iris with the top-row blanked-off. This is still effectively a 6-column Keeb.io Chiri keyset. This has a 15 degree sweep along X and Y axes, with minimal rise. This is from very early in the life of this project.
+
+<img src="https://github.com/sammy-hughes/key-sweep/blob/main/images/dished_3x6_split.jpg" width="360" />
+
 ### Sunder C60 HE
+
+Sunder's latest model, the C60 HE, is a Hall-Effect, column-stagger split. This model strongly resembles a Corne v4, but with an extra row...and with magnetic switches! This layout has a shift towards the middle, as I was hesitant to glue magnetic rings to the bottom of the gorgeous aluminum case.
 
 <img src="https://github.com/sammy-hughes/key-sweep/blob/main/images/sunder-c60he.jpg" width="360" />
 
