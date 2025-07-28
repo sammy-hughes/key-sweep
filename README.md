@@ -61,4 +61,4 @@ A sacrifical scaffold can be added to allow the post and keycap to be positioned
 
 ### Compressed
 
-<img src="https://github.com/sammy-hughes/keybare/blob/main/images/keycap-telescoped.jpeg" width="360" />
+<img src="https://github.com/sammy-hughes/keybare/blob/main/images/keycap-compressed.jpeg" width="360" />
