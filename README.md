@@ -13,7 +13,7 @@ progress and intended scope:
 - [x] Few-parameter keycap surface control
 - [x] Mechanically robust stem mounts with no hard-corner weakspots 
 - [~] Vertical offsets for stems to enable keycap shrouding and low-profile keycaps
-- [~] Sacrificial build-surface interfaces to negate any detriment to tolerances from auto-generated supports
+- [x] Sacrificial build-surface interfaces to negate any detriment to tolerances from auto-generated supports
 - Provide flexible, parametric sweep models
     - [x] Single-lobe spherical sweep for split or left/right half ortholinear layouts
     - [x] Single-lobe, bi-modal sweep for keywell emulation on split/ortho layouts
