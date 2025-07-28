@@ -7,8 +7,8 @@ A multi-axis, concave typing experience on your good ol' planar keyboard!
 This library is an OpenSCAD keycap generator that is designed around minimal-input, multi-axis typing surfaces. The library is intended to make concave "keywell" keyboard experiences more accessible. This is accomplished by implementing the various elements of a keycap as discrete primitives which can be composed as individual "novelty" keys, universal-profile (flat) keysets, single-axis contoured keysets, or multi-axis countoured keysets.
 
 - Keebio Chiri: <img src="https://github.com/sammy-hughes/key-sweep/blob/main/images/dished_3x6_split.jpg" width="360" />
-- Keebio Iris: <img src="https://github.com/sammy-hughes/keybare/blob/main/images/keebio-iris-v7.jpg", width="360" />
-- Sunder C60 HE: <img src="https://github.com/sammy-hughes/keybare/blob/main/images/sunder-c60he.jpg" width="360" />
+- Keebio Iris: <img src="https://github.com/sammy-hughes/key-sweep/blob/main/images/keebio-iris-v7.jpg" width="360" />
+- Sunder C60 HE: <img src="https://github.com/sammy-hughes/key-sweep/blob/main/images/sunder-c60he.jpg" width="360" />
 
 progress and intended scope:
 
