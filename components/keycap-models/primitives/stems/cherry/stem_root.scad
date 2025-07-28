@@ -22,11 +22,6 @@ module post_cherry_root_well(
   module root_transition() {
     intersection() {
       linear_extrude(height=thickness*2, scale=1.325, center=true)
-      offset(r=thickness*0.0625)
-      post_cherry_stem_profile(breadth=breadth, thickness=thickness);
-      mirror([0, 0, 1])
-      linear_extrude(height=thickness*2, scale=1.325, center=true)
-      offset(r=thickness*0.0625)
       post_cherry_stem_profile(breadth=breadth, thickness=thickness);
     }
   }

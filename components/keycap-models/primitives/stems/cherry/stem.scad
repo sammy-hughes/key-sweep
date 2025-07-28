@@ -19,12 +19,11 @@ module stem_cherry_2u(
   lift=$STEM_CHERRY_BASE_LIFT
 ) {
   assert(spacing>-1, "spacing cannot be negative");
-  assert(height>=3.6, "height must not be less than 3.6mm");
-  assert(height-lift>=3.6, "total height must exceed lift by at least 3.6mm");
+  assert(height>=3.2, str("height must not be less than 3.6mm; got ", height));
 
   diameter=breadth+thickness;
-  stem_height=$STEM_CHERRY_BASE_HEIGHT+lift;
-  root_height=height-stem_height;
+  stem_height=$STEM_CHERRY_BASE_HEIGHT;
+  root_height=height-stem_height-lift;
 
   union() {
     post_cherry_stem_geometry(height=stem_height, breadth=breadth, thickness=thickness, spacing=spacing, lift=lift);

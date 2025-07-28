@@ -1,3 +1,5 @@
+include <config.scad>
+
 CHILD_STEM=0;
 CHILD_DIMPLE=1;
 
@@ -9,9 +11,17 @@ function with_round_off_2nd_order(slices, angle) = function (i) max(
   0.001
 );
 
-module keycap_generic(width=[14, 2], r=[2, 4], slices=15, face_offset=[0, 0, 30], face_angle=[37.5, 0, 0], cavity=0.90, unit=1.00) {
+module keycap_generic(
+  width=[$BASE_WIDTH, $FACE_WIDTH],
+  r=[$BASE_R, $FACE_R],
+  slices=$SLICES,
+  face_offset=[0, 0, 5],
+  face_angle=[0, 0, 0],
+  cavity=$KEY_CAVITY,
+  unit=1.00
+) {
   d1 = width[0]+r[0]*2;
-  assert(d1<=18, "primary size must not be greater than 18mm to fit MX spacing");
+  assert(d1<=19.05, "primary size must not be greater than 19.05mm to fit MX spacing");
   d2 = width[1]+r[1]*2;
   assert(d2<=d1, "secondary size must not be greater than primary size");
   
@@ -82,15 +92,15 @@ module keycap_generic(width=[14, 2], r=[2, 4], slices=15, face_offset=[0, 0, 30]
   
   module surface_shape(length=slices) {
     rounding=with_round_off_2nd_order(length, 75);
-    bevel=with_bottom_inset_bevel(round(length*0.25), 0.025);
+    bevel=with_bottom_inset_bevel(round(length*0.125), 0.005);
     basic_shape(length, [for (i=[0:length]) bevel(i)*rounding(i)])
     children();
   }
   
   module cavity_shape(length=slices) {
     rounding=with_round_off_2nd_order(length, 90);
-    bevel_a = with_bottom_outset_bevel(round(length*0.95), 0.025*cavity);
-    bevel_b = with_bottom_inset_bevel(round(length*0.25), 0.025*cavity);
+    bevel_a = with_bottom_outset_bevel(round(length*0.65), 0.005*cavity);
+    bevel_b = with_bottom_inset_bevel(round(length*0.125), 0.005*cavity);
     function final_bevel(i) = bevel_a(i)*bevel_b(i);
     
     scale([cavity, cavity, 1])
@@ -101,7 +111,7 @@ module keycap_generic(width=[14, 2], r=[2, 4], slices=15, face_offset=[0, 0, 30]
       children();
       scale([1, 1, cavity])
       basic_shape(floor(length*cavity), [for (i=[0:length]) final_bevel(i)*pow(rounding(i), 1.5)])
-      scale([3/cavity, 3/cavity, 1/cavity])
+      scale([1/cavity, 1/cavity, 1/cavity])
       children();
     }
   }
@@ -132,8 +142,12 @@ module keycap_generic(width=[14, 2], r=[2, 4], slices=15, face_offset=[0, 0, 30]
   }
 }
 
-/*
-keycap_generic(width=[14, 4], r=[2, 6], face_offset=[6, -16, 30], face_angle=[15, 30, 0], slices=30) {
-  translate([0, 0, 3]) sphere(d=6);
-  translate([0, 0, 30]) sphere(d=64);
-};*/
+module test_keycap_generic() {
+  $fn=90;
+  keycap_generic(width=[14, 4], r=[2, 6], face_offset=[6, -16, 30], face_angle=[15, 30, 0], slices=30) {
+    translate([0, 0, 3]) sphere(d=6);
+    translate([0, 0, 30]) sphere(d=64);
+  };
+}
+
+// test_keycap_generic();
