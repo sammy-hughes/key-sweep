@@ -21,9 +21,9 @@ progress and intended scope:
     - [ ] Multi-modal sweeps with keymasks to implement offset thumb clusters or v-splits on monolithic keyboards
 - Stem compatibility
     - [x] Cherry MX
-    - [ ] Kailh Choc v1
+    - [ ] Kailh Choc v1 (have sample keycaps)
     - [ ] Steelseries Apex
-    - [ ] Alps
+    - [ ] Alps (have sample keycaps)
 - Profiles
     - [x] Spherical
     - [ ] ...does anyone like hard corners?
