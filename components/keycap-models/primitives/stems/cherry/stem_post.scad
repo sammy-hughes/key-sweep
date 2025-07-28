@@ -1,4 +1,5 @@
 include <config.scad>
+include <stem_boot.scad>
 
 module post_cherry_stem_profile(
     breadth=$STEM_CHERRY_WING_BREADTH, 
@@ -20,7 +21,7 @@ module post_cherry_stem_profile(
     square([thickness, breadth], center=true);
   }
 }
-$fn=90;
+
 module post_cherry_stem_geometry(
     height=$STEM_CHERRY_BASE_HEIGHT, 
     breadth=$STEM_CHERRY_WING_BREADTH, 
@@ -31,31 +32,12 @@ module post_cherry_stem_geometry(
   assert(spacing>-1, "spacing cannot be negative");
   assert(lift>-1, "lift cannot be negative");
   assert(height>=3.6, "height must not be less than 3.6mm");
-  assert(height-lift>=3.6, "height must exceed lift by at least 3.6mm");
-  
-  module boot() {
-    translate([0, 0, lift])
-    mirror([0,0,1])
-    difference() {
-      intersection() {
-        for (i=[-1:2:1]) {
-          rotate([0, 0, i*9])
-          translate([i*thickness*0.0875, i*thickness*0.0875, 0])
-          linear_extrude(height=lift, scale=2)
-          offset(delta=-thickness*0.125)
-          scale([1.0625, 1.0625, 1])
-          post_cherry_stem_profile(breadth=breadth, thickness=thickness);
-        }
-      }
-      cylinder(h=0.5, d1=breadth, d2=thickness);
-    }
-  }
+  //assert(height-lift>=3.6, "height must exceed lift by at least 3.6mm");
   
   module base_geometry() {
-    if (lift>0) boot();
     translate([0, 0, lift])
     difference() {
-      linear_extrude(height=height-lift)
+      linear_extrude(height=height)
       post_cherry_stem_profile(breadth=breadth, thickness=thickness);
 
       cylinder(h=0.5, d1=breadth, d2=thickness);
