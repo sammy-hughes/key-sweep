@@ -31,4 +31,4 @@ progress and intended scope:
 - Symbol-sets
     - [ ] ? haven't thought this part through ?
 
-This project is still in active development, and does not yet implement embedded symbols. To achieve lettering, a text node can be linear_extrud()'ed as a child of a keycap, and it will be subtracted from the top surface. No off-the-shelf elements are yet provided, though, and it is not yet clear what the target API would look like.
+This project is still in active development, and does not yet implement embedded legends. To achieve lettering, a text node can be linear_extrude()'ed as a child of a keycap, and it will be subtracted from the top surface. The [components/legends/legend.scad](https://github.com/sammy-hughes/keybare/blob/main/components/legends/legend.scad) file provides a controlled-size, self-scaling model, but requires a string parameter instead of taking children.
